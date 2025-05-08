@@ -1,7 +1,7 @@
 const Citizen = require('../models/Citizen');
 
 // Register a new citizen
-exports.registerCitizen = async (req, res) => {
+exports.createCitizen = async (req, res) => {
   const { name, phone_number, password, status } = req.body;
 
   try {
@@ -27,17 +27,12 @@ exports.registerCitizen = async (req, res) => {
   }
 };
 
-// Get citizen profile by ID
-exports.getCitizenProfile = async (req, res) => {
+// Get all citizens
+exports.getAllCitizens = async (req, res) => {
   try {
-    const citizen = await Citizen.findById(req.params.id);
-
-    if (!citizen) {
-      return res.status(404).json({ message: 'Citizen not found' });
-    }
-
-    res.status(200).json(citizen);
+    const citizens = await Citizen.find();
+    res.status(200).json(citizens);
   } catch (err) {
-    res.status(500).json({ message: 'Error fetching citizen profile', error: err.message });
+    res.status(500).json({ message: 'Error fetching citizens', error: err.message });
   }
 };
