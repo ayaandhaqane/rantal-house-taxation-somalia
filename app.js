@@ -1,32 +1,42 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const citizenRoutes = require('./routes/citizenRoutes');
+
+// Import Routes
+const districtRoutes = require('./routes/districtRoutes');
+const branchRoutes = require('./routes/branchRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 
+// Initialize the app
 const app = express();
 
-// Connect to MongoDB
+// Connect to the database
 connectDB();
 
-// Middleware setup
-app.use(cors());
-app.use(express.json());
+// Middleware
+app.use(cors()); // Enable Cross-Origin Resource Sharing (CORS)
+app.use(express.json()); // Parse incoming JSON requests
 
-// Routes setup
-app.use('/api/citizens', citizenRoutes);
+// Routes
+app.use('/api/districts', districtRoutes);
+app.use('/api/branches', branchRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/notifications', notificationRoutes);
+
+// Home route (optional)
+app.get('/', (req, res) => {
+  res.send('Welcome to the Rental House Taxation API!');
+});
 
 // Set the port
 const port = process.env.PORT || 5000;
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
 
 module.exports = app;
