@@ -8,6 +8,8 @@ const branchRoutes = require('./routes/branchRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const predictionRoutes = require('./routes/predictionRoutes');
+
 
 // Initialize the app
 const app = express();
@@ -25,6 +27,8 @@ app.use('/api/branches', branchRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/predictions', predictionRoutes); // Added new route for predictions
+
 
 // Home route (optional)
 app.get('/', (req, res) => {
