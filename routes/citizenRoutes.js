@@ -1,12 +1,12 @@
 const express = require('express');
-const { registerCitizen, getCitizenProfile } = require('../controllers/citizenController');
+const { createCitizen, getAllCitizens } = require('../controllers/citizenController');
 
 const router = express.Router();
 
-// Route to register a new citizen
-router.post('/register', registerCitizen);
+// POST route to create a new citizen
+router.post('/create', createCitizen);
 
-// Route to get citizen profile by ID
-router.get('/:id', getCitizenProfile);
+// GET route to get all citizens
+router.get('/', getAllCitizens);
 
 module.exports = router;
