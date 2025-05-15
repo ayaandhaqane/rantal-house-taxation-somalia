@@ -370,6 +370,125 @@
 
 
 
+// // app.js
+// const express = require('express');
+// const dotenv = require('dotenv');
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
+// const connectDB = require('./config/db');
+
+// // Import Routes
+// const citizenRoutes = require('./routes/citizenRoutes');
+// const districtRoutes = require('./routes/districtRoutes');
+// const branchRoutes = require('./routes/branchRoutes');
+// const paymentRoutes = require('./routes/paymentRoutes');
+// const complaintRoutes = require('./routes/complaintRoutes');
+// const notificationRoutes = require('./routes/notificationRoutes');
+// const predictionRoutes = require('./routes/predictionRoutes');
+// const propertyRoutes = require('./routes/propertyRoutes');
+// const taxRoutes = require('./routes/taxRoutes');
+// const zoneRoutes = require('./routes/zoneRoutes');
+// const adminRoutes = require('./routes/userRoutes');  // Admin routes
+
+// // Load environment variables
+// dotenv.config();  // Load .env file
+
+// // Connect to the database
+// connectDB();  // Connect to MongoDB
+
+// // Initialize the app
+// const app = express();
+
+// // Middleware
+// app.use(bodyParser.json());  // Parse incoming JSON requests
+// app.use(cors());  // Enable Cross-Origin Resource Sharing (CORS)
+
+// // Routes
+// app.use('/api/citizens', citizenRoutes);  // Citizen routes
+// app.use('/api/districts', districtRoutes);  // District routes
+// app.use('/api/branches', branchRoutes);  // Branch routes
+// app.use('/api/payments', paymentRoutes);  // Payment routes
+// app.use('/api/complaints', complaintRoutes);  // Complaint routes
+// app.use('/api/notifications', notificationRoutes);  // Notification routes
+// app.use('/api/predictions', predictionRoutes);  // Prediction routes
+// app.use('/api/properties', propertyRoutes);  // Property routes
+// app.use('/api/taxes', taxRoutes);  // Tax routes
+// app.use('/api/zones', zoneRoutes);  // Zone routes
+// app.use('/api/admin', adminRoutes);  // Admin routes
+
+// // Home route (optional)
+// app.get('/', (req, res) => {
+//   res.send('Welcome to the Rental House Taxation API!');
+// });
+
+// // Set the port
+// const port = process.env.PORT || 5000;
+
+// // Start the server
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
+
+// module.exports = app;  // Export app for potential testing
+
+
+
+
+
+
+
+// // const express = require('express');
+// // const dotenv = require('dotenv');
+// // const bodyParser = require('body-parser');
+// // const cors = require('cors');
+// // const connectDB = require('./config/db'); // Database connection
+
+// // // Import Routes
+// // const adminRoutes = require('./routes/adminRoutes');  // Admin routes
+
+// // // Load environment variables
+// // dotenv.config();
+
+// // // Connect to the database
+// // connectDB();
+
+// // // Initialize the app
+// // const app = express();
+
+// // // Middleware
+// // app.use(bodyParser.json());
+// // app.use(cors());
+
+// // // Routes
+// // app.use('/api/admin', adminRoutes);  // Admin routes
+
+// // // Home route (optional)
+// // app.get('/', (req, res) => {
+// //   res.send('Welcome to the Rental House Taxation API!');
+// // });
+
+// // // Set the port
+// // const port = process.env.PORT || 5000;
+
+// // // Start the server
+// // app.listen(port, () => {
+// //   console.log(`Server is running on port ${port}`);
+// // });
+
+// // module.exports = app;
+
+
+
+
+
+
+
+
+
+
+
+
+
 // app.js
 const express = require('express');
 const dotenv = require('dotenv');
@@ -388,7 +507,8 @@ const predictionRoutes = require('./routes/predictionRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
 const taxRoutes = require('./routes/taxRoutes');
 const zoneRoutes = require('./routes/zoneRoutes');
-const adminRoutes = require('./routes/adminRoutes');  // Admin routes
+const userRoutes = require('./routes/userRoutes');  // Admin routes
+
 
 // Load environment variables
 dotenv.config();  // Load .env file
@@ -414,7 +534,7 @@ app.use('/api/predictions', predictionRoutes);  // Prediction routes
 app.use('/api/properties', propertyRoutes);  // Property routes
 app.use('/api/taxes', taxRoutes);  // Tax routes
 app.use('/api/zones', zoneRoutes);  // Zone routes
-app.use('/api/admin', adminRoutes);  // Admin routes
+app.use('/api/users', userRoutes);  // User routes (Admin)
 
 // Home route (optional)
 app.get('/', (req, res) => {
@@ -430,49 +550,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;  // Export app for potential testing
-
-
-
-
-
-
-
-// const express = require('express');
-// const dotenv = require('dotenv');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-// const connectDB = require('./config/db'); // Database connection
-
-// // Import Routes
-// const adminRoutes = require('./routes/adminRoutes');  // Admin routes
-
-// // Load environment variables
-// dotenv.config();
-
-// // Connect to the database
-// connectDB();
-
-// // Initialize the app
-// const app = express();
-
-// // Middleware
-// app.use(bodyParser.json());
-// app.use(cors());
-
-// // Routes
-// app.use('/api/admin', adminRoutes);  // Admin routes
-
-// // Home route (optional)
-// app.get('/', (req, res) => {
-//   res.send('Welcome to the Rental House Taxation API!');
-// });
-
-// // Set the port
-// const port = process.env.PORT || 5000;
-
-// // Start the server
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });
-
-// module.exports = app;
