@@ -508,6 +508,8 @@ const propertyRoutes = require('./routes/propertyRoutes');
 const taxRoutes = require('./routes/taxRoutes');
 const zoneRoutes = require('./routes/zoneRoutes');
 const userRoutes = require('./routes/userRoutes');  // Admin routes
+const combinedRoutes = require('./routes/combinedRoutes');
+
 
 
 // Load environment variables
@@ -535,6 +537,8 @@ app.use('/api/properties', propertyRoutes);  // Property routes
 app.use('/api/taxes', taxRoutes);  // Tax routes
 app.use('/api/zones', zoneRoutes);  // Zone routes
 app.use('/api/users', userRoutes);  // User routes (Admin)
+app.use('/api/combined', combinedRoutes);
+
 
 // Home route (optional)
 app.get('/', (req, res) => {
