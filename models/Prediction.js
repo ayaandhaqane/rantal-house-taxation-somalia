@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 
 const predictionSchema = new mongoose.Schema({
-    citizen_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Citizen', required: true },
-    predicted_tax: { type: Number, required: true }
+  predicted_tax: { type: Number, required: true },
+  houseNo: String,
+  branch: String,
+  district: String,
+  zone: String,
+  currentHouseRent: Number,
+  predictionPeriod: String,
 });
 
 const Prediction = mongoose.model('Prediction', predictionSchema);

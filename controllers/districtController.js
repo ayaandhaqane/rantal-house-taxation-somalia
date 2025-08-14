@@ -1,33 +1,3 @@
-// const District = require('../models/District');
-
-// // Get all districts
-// exports.getAllDistricts = async (req, res) => {
-//     try {
-//         const districts = await District.find();
-//         res.status(200).json(districts);
-//     } catch (error) {
-//         res.status(500).json({ message: 'Server error' });
-//     }
-// };
-
-// // Create a new district
-// exports.createDistrict = async (req, res) => {
-//     try {
-//         const { district_name } = req.body;
-//         const newDistrict = new District({ district_name });
-//         await newDistrict.save();
-//         res.status(201).json(newDistrict);
-//     } catch (error) {
-//         res.status(500).json({ message: 'Server error' });
-//     }
-// };
-
-
-
-
-
-
-
 const District = require('../models/District');
 
 // Get all districts
@@ -40,17 +10,43 @@ exports.getAllDistricts = async (req, res) => {
   }
 };
 
-// Create new district
+
 exports.createDistrict = async (req, res) => {
   try {
     const { district_name } = req.body;
+
+    // Normalize district name by removing hyphens, spaces, and converting to lowercase
+    const normalizedDistrictName = district_name
+      .trim()
+      .toLowerCase()
+      .replace(/[-\s]/g, ''); // Remove hyphens and spaces
+
+    // Check if the district already exists
+    const districts = await District.find();
+
+    // Normalize all existing district names and compare
+    const normalizedExistingDistricts = districts.map(d => 
+      d.district_name.trim().toLowerCase().replace(/[-\s]/g, '')
+    );
+
+    const foundDuplicate = normalizedExistingDistricts.some(existing => 
+      existing === normalizedDistrictName
+    );
+
+    if (foundDuplicate) {
+      return res.status(400).json({ message: 'District already exists' });
+    }
+
+    // If the district doesn't exist, create a new one
     const newDistrict = new District({ district_name });
     await newDistrict.save();
+
     res.status(201).json(newDistrict);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
 
 // Update district by ID
 exports.updateDistrict = async (req, res) => {

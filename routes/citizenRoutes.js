@@ -1,74 +1,19 @@
-// // // const express = require('express');
-// // // const { createCitizen, getAllCitizens } = require('../controllers/citizenController');
-
-// // // const router = express.Router();
-
-// // // // POST route to create a new citizen
-// // // router.post('/create', createCitizen);
-
-// // // // GET route to get all citizens
-// // // router.get('/', getAllCitizens);
-
-// // // module.exports = router;
-
-
-
-// // const express = require('express');
-// // const { createCitizen, getAllCitizens } = require('../controllers/citizenController');
-
-// // const router = express.Router();
-
-// // // POST create citizen
-// // router.post('/create', createCitizen);
-
-// // // GET all citizens
-// // router.get('/', getAllCitizens);
-
-// // module.exports = router;
-
-
-
-// const express = require('express');
-// const {
-//   createCitizen,
-//   getAllCitizens,
-//   updateCitizen,
-//   deleteCitizen
-// } = require('../controllers/citizenController');
-
-// const router = express.Router();
-
-// router.post('/create', createCitizen);    // Create
-// router.get('/', getAllCitizens);          // Read all
-// router.put('/:id', updateCitizen);        // Update by ID
-// router.delete('/:id', deleteCitizen);     // Delete by ID
-
-// module.exports = router;
-
-
-
-// const express = require('express');
-// const { createCitizen, getAllCitizens } = require('../controllers/citizenController');
-
-// const router = express.Router();
-
-// // POST create citizen
-// router.post('/create', createCitizen);
-
-// // GET all citizens
-// router.get('/', getAllCitizens);
-
-// module.exports = router;
-
-
 const express = require('express');
 const {
   createCitizen,
   getAllCitizens,
   updateCitizen,
   deleteCitizen,
+  loginCitizen, 
+  getCitizenBasicProfile,
+  getCitizensByOwnDistrict,
+  getManagedCitizenList,
+  getCitizenReport,
+  getCitizenCounts,
+  getCitizenCountByDistrict,
+  getCitizensByDistrict
 } = require('../controllers/citizenController');
-
+const auth = require('../middleware/auth'); 
 const router = express.Router();
 
 // POST create citizen
@@ -77,10 +22,22 @@ router.post('/create', createCitizen);
 // GET all citizens
 router.get('/', getAllCitizens);
 
+router.get('/managed-list', auth, getManagedCitizenList); 
 // PUT update citizen by ID
 router.put('/:id', updateCitizen);
 
 // DELETE citizen by ID
 router.delete('/:id', deleteCitizen);
 
+router.post('/login', loginCitizen); // <-- Add this line
+
+router.get('/profile/:id', getCitizenBasicProfile);
+
+
+router.get('/my-district', auth, getCitizensByOwnDistrict); // <-- Kudar line-kan
+// GET citizen counts based on filters
+router.get('/report', auth, getCitizenReport);
+// Route for fetching citizen count by district
+router.get('/citizens/count', getCitizenCountByDistrict);
+router.get('/citizens-by-district', getCitizensByDistrict);
 module.exports = router;

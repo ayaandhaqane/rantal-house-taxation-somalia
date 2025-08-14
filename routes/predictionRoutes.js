@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { createPrediction, getAllPredictions } = require('../controllers/predictionController');
+const { createPrediction } = require('../controllers/predictionController');
 
-// Create a prediction
-router.post('/', createPrediction);
-
-// Get all predictions
-router.get('/', getAllPredictions);
+// POST endpoint to create prediction
+router.post('/create', createPrediction);
 
 module.exports = router;

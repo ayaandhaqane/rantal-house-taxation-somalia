@@ -1,126 +1,146 @@
-// // // // const express = require('express');
-// // // // const { createProperty, getAllProperties, getPropertyById } = require('../controllers/propertyController');
+// const express = require('express');
+// const router = express.Router();
+// const auth = require('../middleware/auth');
+// const {
+//   createProperty,
+//   getAllProperties,
+//   getPropertyById,
+//   updateProperty,
+//   deleteProperty,
+//   getPropertyByHouseNo,
+//   getPropertyByHouseNoForCitizen,
+//   getPropertyByCitizenId,
+//   togglePropertyStatus,
+//   calculatePropertyTax,
+//   getNextHouseNumber
+// } = require('../controllers/propertyController');
 
-// // // // const router = express.Router();
+// // Create property
+// router.post('/create', createProperty);
 
-// // // // // Route to create a new property
-// // // // router.post('/create', createProperty);
-
-// // // // // Route to get all properties
-// // // // router.get('/', getAllProperties);
-
-// // // // // Route to get a specific property by ID
-// // // // router.get('/:id', getPropertyById);
-
-// // // // module.exports = router;
-
-
-
-// // // const express = require('express');
-// // // const {
-// // //   createProperty,
-// // //   getAllProperties,
-// // //   getPropertyById,
-// // //   updateProperty,
-// // //   deleteProperty,
-// // // } = require('../controllers/propertyController');
-
-// // // const router = express.Router();
-
-// // // router.post('/create', createProperty);
-// // // router.get('/', getAllProperties);
-// // // router.get('/:id', getPropertyById);
-// // // router.put('/:id', updateProperty);
-// // // router.delete('/:id', deleteProperty);
-
-// // // module.exports = router;
+// // Get all properties (general)
+// router.get('/', getAllProperties);
 
 
-// // // const express = require('express');
-// // // const {
-// // //   createProperty,
-// // //   getAllProperties,
-// // //   updateProperty
-// // // } = require('../controllers/propertyController');
+// // --- SPECIFIC ROUTES FIRST ---
 
-// // // const router = express.Router();
+// // Route to get the next generated house number for preview on the frontend
+// // This has been moved up so it's matched before the '/:id' route below
+// router.get('/next-house-no', getNextHouseNumber);
 
-// // // // Create a new property (and related tax and tax collection)
-// // // router.post('/create', createProperty);
-
-// // // // Get all properties (with populated refs)
-// // // router.get('/', getAllProperties);
-
-// // // // Update a property by id (and update related tax and tax collections)
-// // // router.put('/:id', updateProperty);
-
-// // // module.exports = router;
+// router.get('/calculate-tax', calculatePropertyTax);
+// router.get('/house/:houseNo', getPropertyByHouseNo);
+// router.get('/house/:houseNo/citizen/:citizenId', getPropertyByHouseNoForCitizen);
+// router.get('/citizen/:citizenId', getPropertyByCitizenId);
 
 
+// // --- DYNAMIC ROUTES LAST ---
 
-// // // const express = require('express');
-// // // const router = express.Router();
+// // This will now correctly handle requests for a specific property by its ID
+// router.get('/:id', getPropertyById);
 
-// // // const {
-// // //   createProperty,
-// // //   getAllProperties,
-// // //   updateProperty,
-// // //   // ...other controllers you have
-// // // } = require('../controllers/propertyController');
+// // Update, delete, and toggle status by id
+// router.put('/:id', updateProperty);
+// router.delete('/:id', deleteProperty);
+// router.patch('/:id/toggle-status', togglePropertyStatus);
 
-// // // router.post('/create', createProperty);
-// // // router.get('/', getAllProperties);
-// // // router.put('/:id', updateProperty);
-
-// // // module.exports = router;
-
-
-// // const express = require('express');
-// // const router = express.Router();
-
-// // const {
-// //   createProperty,
-// //   getAllProperties,
-// //   updateProperty,
-// // } = require('../controllers/propertyController');
-
-// // router.post('/create', createProperty);
-// // router.get('/', getAllProperties);
-// // router.put('/:id', updateProperty);
-
-// // module.exports = router;
-
+// module.exports = router;
 
 
 // const express = require('express');
 // const router = express.Router();
+// const auth = require('../middleware/auth');
+// const {
+//   createProperty,
+//   getAllProperties,
+//   getPropertyById,
+//   updateProperty,
+//   deleteProperty,
+//   getPropertyByHouseNo,
+//   getPropertyByHouseNoForCitizen,
+//   getPropertyByCitizenId,
+//   togglePropertyStatus,
+//   calculatePropertyTax,
+//   getNextHouseNumber,
+//   getTotalHouseRentForZone
+// } = require('../controllers/propertyController');
 
-// const propertyController = require('../controllers/propertyController');
+// // Create property
+// router.post('/create', createProperty);
 
-// router.post('/create', propertyController.createProperty);
-// router.get('/', propertyController.getAllProperties);
-// router.put('/:id', propertyController.updateProperty);
+// // Get all properties (general)
+// router.get('/', getAllProperties);
+
+
+// // --- SPECIFIC ROUTES FIRST ---
+
+// // Route to get the next generated house number for preview on the frontend
+// // This has been moved up so it's matched before the '/:id' route below
+// router.get('/next-house-no', getNextHouseNumber);
+
+// router.get('/calculate-tax', calculatePropertyTax);
+// router.get('/house/:houseNo', getPropertyByHouseNo);
+// router.get('/house/:houseNo/citizen/:citizenId', getPropertyByHouseNoForCitizen);
+// router.get('/citizen/:citizenId', getPropertyByCitizenId);
+
+
+// // --- DYNAMIC ROUTES LAST ---
+
+// // This will now correctly handle requests for a specific property by its ID
+// router.get('/:id', getPropertyById);
+
+// // Update, delete, and toggle status by id
+// router.put('/:id', updateProperty);
+// router.delete('/:id', deleteProperty);
+// router.patch('/:id/toggle-status', togglePropertyStatus);
+
+
+// // Route to get the total house rent for a zone
+// router.get('/total-house-rent', getTotalHouseRentForZone);
+
+
 
 // module.exports = router;
 
 
 
-// routes/propertyRoutes.js
+
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const {
   createProperty,
   getAllProperties,
   getPropertyById,
   updateProperty,
   deleteProperty,
+  getPropertyByHouseNo,
+  getPropertyByHouseNoForCitizen,
+  getPropertyByCitizenId,
+  togglePropertyStatus,
+  calculatePropertyTax,
+  getNextHouseNumber,
+  getTotalHouseRentForZone
 } = require('../controllers/propertyController');
 
+// Create property
 router.post('/create', createProperty);
+
+// Get all properties (general)
 router.get('/', getAllProperties);
+
+// --- SPECIFIC ROUTES FIRST ---
+router.get('/next-house-no', getNextHouseNumber);
+router.get('/calculate-tax', calculatePropertyTax);
+router.get('/total-house-rent', getTotalHouseRentForZone); // Moved this up
+router.get('/house/:houseNo', getPropertyByHouseNo);
+router.get('/house/:houseNo/citizen/:citizenId', getPropertyByHouseNoForCitizen);
+router.get('/citizen/:citizenId', getPropertyByCitizenId);
+
+// --- DYNAMIC ROUTES LAST ---
 router.get('/:id', getPropertyById);
 router.put('/:id', updateProperty);
 router.delete('/:id', deleteProperty);
+router.patch('/:id/toggle-status', togglePropertyStatus);
 
 module.exports = router;
-

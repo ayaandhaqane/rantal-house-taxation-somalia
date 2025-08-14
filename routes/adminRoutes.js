@@ -1,35 +1,16 @@
-// // // routes/adminRoutes.js
-// // const express = require('express');
-// // const router = express.Router();
-// // const adminController = require('../controllers/adminController');
-
-// // // Route to register admin
-// // router.post('/register', adminController.registerAdmin);
-
-// // module.exports = router;
-
-
-// const express = require('express');
-// const router = express.Router();
-// const adminController = require('../controllers/adminController');
-
-// // Route to register admin
-// router.post('/register', adminController.registerAdmin);
-
-// // Route to login admin
-// router.post('/login', adminController.loginAdmin);
-
-// module.exports = router;
-
-
 const express = require('express');
 const router = express.Router();
-const adminController = require('../controllers/adminController');
+const AdminController = require('../controllers/adminController');
+const authMiddleware = require('../middleware/auth');
+// const { createDeleteRequest } = require('../controllers/StatusRequestController');
 
-// Route to register admin
-router.post('/register', adminController.registerAdmin);
+// Add this new route to get all requests
+router.get('/status-requests', authMiddleware, AdminController.getAllStatusChangeRequests);
+// router.post('/delete-requests', authMiddleware, createDeleteRequest);
 
-// Route to login admin
-router.post('/login', adminController.loginAdmin);
+// This is your existing route - keep it as is
+router.post('/approve-status-change', authMiddleware, AdminController.approveStatusChange);
+
+router.post('/approve-citizen-deletion', authMiddleware, AdminController.approveCitizenDeletion);
 
 module.exports = router;
