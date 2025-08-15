@@ -122,7 +122,7 @@ const messageStoreRoutes = require('./routes/messageStoreRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const statusChangeRoutes = require('./routes/statusChangeRequestRoutes');  // Add the status change route
 const reportRoutes = require('./routes/reportRouter'); // Add this to include your new report routes
-
+const uploadRoutes = require('./routes/uploadRoutes')
 
 
 
@@ -176,8 +176,10 @@ app.use('/api/message-store', messageStoreRoutes);
 app.use('/api/admin', adminRoutes);  // Admin routes
 app.use('/api/', statusChangeRoutes);  // Status change request route
 app.use('/api/report', reportRoutes); // Report routes (Citizen report, etc.)
+app.use('/api', uploadRoutes);
 
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Home route (optional)

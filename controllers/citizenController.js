@@ -199,7 +199,7 @@ exports.getCitizenBasicProfile = async (req, res) => {
 
     property = await property.populate("district_id", "district_name");
     // console.log(citizen);
-    const baseURL = "http://192.168.18.8:5000/";
+    const baseURL = "http://10.139.107.19:5000/";
     const filePath = citizen?.profile_image ?? "";
 
     // Replace backslashes with forward slashes to form a valid URL

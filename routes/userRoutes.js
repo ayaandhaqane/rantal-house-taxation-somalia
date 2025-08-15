@@ -1,74 +1,3 @@
-// // routes/userRouter.js
-// const express = require('express');
-// const router = express.Router();
-// const {
-//   registerUser,
-//   loginUser,
-//   verifyOTP,
-//   getAllUsers,
-//   deleteUser,
-//   updateUser,
-//   updateUserProfile,
-//   getUserProfile,
-//   getCurrentUser
-// } = require('../controllers/userController');
-// const { authenticate } = require('../middleware/authenticate');
-// const upload = require('../config/multer');
-
-// // Public routes
-// router.post('/register', registerUser);
-// router.post('/login', loginUser);
-// router.post('/verify-otp', verifyOTP);
-
-// // Admin routes
-// router.get('/', getAllUsers);
-// router.delete('/:id', authenticate, deleteUser);
-// router.put('/:id', authenticate, updateUser);
-// router.get('/me', authenticate, getCurrentUser);
-
-// // Profile routes for logged-in user
-// router.get('/profile', authenticate, getUserProfile);
-// router.put('/profile', authenticate, upload.single('avatar'), updateUserProfile);
-
-// module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // routes/userRouter.js
-// const express = require('express');
-// const router = express.Router();
-// const {
-//   updateUserProfile,
-//   getUserProfile,
-//   // ... other controllers
-// } = require('../controllers/userController');
-// const { authenticate } = require('../middleware/authenticate');
-// const upload = require('../config/multer');
-
-// router.get('/profile', authenticate, getUserProfile);
-// router.put('/profile', authenticate, upload.single('avatar'), updateUserProfile);
-
-// module.exports = router;
-
-
-
-
-
-
-
-
-
-
 const express = require('express');
 const router = express.Router();
 const {
@@ -110,5 +39,18 @@ router.get('/me', authenticate, getCurrentUser);
 // router.get('/', authenticate, getAllUsers); // Only authenticated (add admin check if needed)
 router.put('/:id', authenticate, updateUser);
 router.delete('/:id', authenticate, deleteUser);
+
+
+
+// Route to resend OTP
+router.post('/resend-otp', (req, res) => {
+  const { email } = req.body; // The email for which the OTP is being requested
+
+  // Send OTP
+  sendOTP(email);  // Trigger OTP resend to the provided email
+
+  res.status(200).send({ message: 'OTP has been resent successfully.' });
+});
+
 
 module.exports = router;
